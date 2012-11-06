@@ -1,0 +1,12 @@
+SMAP
+TuringMachineGenerator.java
+Xtend
+*S Xtend
+*F
++ 0 TuringMachineGenerator.xtend
+src/it/marcotinacci/turingmachine/generator/TuringMachineGenerator.xtend
+*L
+14:13,3
+15:16,2
+18:21
+*E

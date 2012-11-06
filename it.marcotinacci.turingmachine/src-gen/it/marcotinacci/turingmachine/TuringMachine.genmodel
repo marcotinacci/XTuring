@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/it.marcotinacci.turingmachine/src-gen" editDirectory="/it.marcotinacci.turingmachine.edit/src"
+    editorDirectory="/it.marcotinacci.turingmachine.editor/src" modelPluginID="it.marcotinacci.turingmachine"
+    forceOverwrite="true" modelName="TuringMachine" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="it.marcotinacci.turingmachine.edit"
+    editorPluginID="it.marcotinacci.turingmachine.editor" runtimeVersion="2.8">
+  <genPackages prefix="TuringMachine" basePackage="it.marcotinacci.turingmachine"
+      disposableProviderFactory="true" ecorePackage="TuringMachine.ecore#/">
+    <genClasses ecoreClass="TuringMachine.ecore#//Machine">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TuringMachine.ecore#//Machine/symbols"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TuringMachine.ecore#//Machine/states"/>
+    </genClasses>
+    <genClasses ecoreClass="TuringMachine.ecore#//Symbol">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TuringMachine.ecore#//Symbol/name"/>
+    </genClasses>
+    <genClasses ecoreClass="TuringMachine.ecore#//State">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TuringMachine.ecore#//State/beginState"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TuringMachine.ecore#//State/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TuringMachine.ecore#//State/transactions"/>
+    </genClasses>
+    <genClasses ecoreClass="TuringMachine.ecore#//Transaction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TuringMachine.ecore#//Transaction/reading"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TuringMachine.ecore#//Transaction/read"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TuringMachine.ecore#//Transaction/writing"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TuringMachine.ecore#//Transaction/write"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TuringMachine.ecore#//Transaction/moving"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TuringMachine.ecore#//Transaction/move"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TuringMachine.ecore#//Transaction/next"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TuringMachine.ecore#//Transaction/toState"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TuringMachine.ecore#//Transaction/final"/>
+    </genClasses>
+    <genClasses ecoreClass="TuringMachine.ecore#//ReadWriteSymbol">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TuringMachine.ecore#//ReadWriteSymbol/symbol"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TuringMachine.ecore#//ReadWriteSymbol/empty"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
