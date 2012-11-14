@@ -3,20 +3,117 @@
  */
 package it.marcotinacci.turingmachine.generator
 
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IGenerator
-import org.eclipse.xtext.generator.IFileSystemAccess
 import it.marcotinacci.turingmachine.turingMachine.Machine
+import it.marcotinacci.turingmachine.turingMachine.Transaction
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.generator.IGenerator
 
 class TuringMachineGenerator implements IGenerator {
 	
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		var Machine m = resource.contents.get(0) as Machine
-		fsa.generateFile("machine.java", m.compile)
+		// generate the builder class
+		fsa.generateFile("TuringMachineBuilder.java", m.compile)
 	}
 
 	def CharSequence compile(Machine machine) { 
-		
+		'''
+		package packagetitle;
+
+		import java.util.HashSet;
+
+		public class TuringMachineBuilder {
+			public static TuringMachine build(){
+				HashSet<State> states = new HashSet<State>();
+				State terminate = new State("terminate");
+				states.add(terminate);
+				«FOR state:machine.states»
+					State «state.name»;
+					«state.name» = new State("«state.name»");
+					states.add(«state.name»);
+					«IF state.beginState»State begin = «state.name»;«ENDIF»
+				«ENDFOR»
+				«FOR state:machine.states»
+					«FOR transaction:state.transactions»
+						«addTransactions(state.name, transaction)»
+					«ENDFOR»
+				«ENDFOR»
+				return new TuringMachine("111+11", states, begin);
+			}
+		}
+		'''
 	}
 
+	def addTransactions(String stateName, Transaction transaction) {
+		// multeplicity of the transaction
+		var Integer size = null
+		if(transaction.reading) size = transaction.read.size
+		else if (transaction.writing) size = transaction.write.size
+		
+		// parameters of single transaction
+		var String toRead = null
+		var String toWrite = null
+		var dir = transaction.getDirection
+		var nextState = transaction.getState(stateName)
+		
+		// if write and read symbols are not specified
+		if(size == null){
+			transactionToJava(stateName, toRead, toWrite, dir, nextState)
+		}else{
+			var i = -1
+			var ret = new StringBuffer
+			while((i=i+1) < size){
+				toRead = transaction.getReadSymbol(i)
+				toWrite = transaction.getWriteSymbol(i)
+				ret.append(transactionToJava(stateName, toRead, toWrite, dir, nextState))
+			}
+			ret.toString
+		}		
+	}
+	
+	def transactionToJava(String stateName, String toRead, String toWrite, String dir, String nextState) {
+		new String(
+			stateName + ".add(new Transaction(" + 
+			toRead + "," + 
+			toWrite + ", Direction."+
+			dir + "," + 
+			nextState + "));\n"
+		)
+	}
+
+	def String getWriteSymbol(Transaction transaction, int i) {
+		if(transaction.writing){
+			if(transaction.write.get(i).empty)
+				return new String("'~'")
+			else
+				return new String("'"+transaction.write.get(i).symbol.name+"'")
+		}
+		return null
+	}
+
+	def String getReadSymbol(Transaction transaction, int i) {
+		if(transaction.reading){
+			if(transaction.read.get(i).empty)
+				return new String("'~'")
+			else
+				return new String("'"+transaction.read.get(i).symbol.name+"'")
+		}
+		return null
+	}
+
+	def getState(Transaction transaction, String stateName) { 
+		if(transaction.next)
+			return transaction.toState.name
+		if(transaction.final)
+			return new String("terminate")
+		return stateName
+	}
+
+	def getDirection(Transaction transaction) { 
+		if(transaction.moving)
+			if(transaction.move.equals("left")) "LEFT"
+			else "RIGHT"
+		else "STAND"
+	}
 }

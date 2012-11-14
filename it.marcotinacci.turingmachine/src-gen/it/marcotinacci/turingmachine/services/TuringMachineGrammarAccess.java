@@ -35,6 +35,11 @@ public class TuringMachineGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cStatesAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cStatesStateParserRuleCall_4_0 = (RuleCall)cStatesAssignment_4.eContents().get(0);
 		
+		//// TODO sottomacchine di turing
+		//// TODO outline alfabeto
+		//// TODO error un solo stato begin
+		//// TODO warning tutti i simboli dell'alfabeto previsti
+		//// TODO error message on terminate
 		//Machine:
 		//	"alphabet" "{" (symbols+=Symbol ("," symbols+=Symbol)*)? "}" states+=State+;
 		public ParserRule getRule() { return rule; }
@@ -351,6 +356,11 @@ public class TuringMachineGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	
+	//// TODO sottomacchine di turing
+	//// TODO outline alfabeto
+	//// TODO error un solo stato begin
+	//// TODO warning tutti i simboli dell'alfabeto previsti
+	//// TODO error message on terminate
 	//Machine:
 	//	"alphabet" "{" (symbols+=Symbol ("," symbols+=Symbol)*)? "}" states+=State+;
 	public MachineElements getMachineAccess() {

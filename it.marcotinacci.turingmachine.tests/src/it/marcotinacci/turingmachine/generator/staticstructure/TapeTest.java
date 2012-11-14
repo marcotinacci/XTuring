@@ -19,8 +19,8 @@ public class TapeTest {
 
 	@Test
 	public void test1() {
-		TuringMachineUtils.writeOnTape("111+1111", _tape);
-		System.out.println(TuringMachineUtils.readFromTape(_tape));
+		_tape.writeAll("111+1111");
+		System.out.println(_tape.read());
 	}
 	
 	

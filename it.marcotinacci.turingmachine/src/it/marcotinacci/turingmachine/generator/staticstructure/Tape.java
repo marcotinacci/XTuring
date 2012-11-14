@@ -1,6 +1,7 @@
 package it.marcotinacci.turingmachine.generator.staticstructure;
 
 import java.util.HashMap;
+import java.util.Set;
 
 public class Tape extends HashMap<Integer, Character> {
 	
@@ -34,5 +35,47 @@ public class Tape extends HashMap<Integer, Character> {
 		// if null return tilde
 		return ret == null ? '~' : ret;
 	}
-
+	
+	@Override
+	public String toString() {
+		Set<Integer> keys = keySet();
+		// find max and min
+		Integer max = Integer.MIN_VALUE;
+		Integer min = Integer.MAX_VALUE;
+		for (Integer key : keys) {
+			if(key > max)
+				max = key;
+			if(key < min)
+				min = key;
+		}
+		// compose output
+		StringBuffer ret = new StringBuffer();
+		for(Integer i = min; i <= max; i++){
+			Character c = get(i);
+			if(c == null)
+				ret.append(' ');
+			else
+				ret.append(c);
+		}
+		return ret.toString();
+	}
+	
+	public void goToFirst(){
+		Set<Integer> keys = keySet();
+		// find min
+		Integer min = Integer.MAX_VALUE;
+		for (Integer key : keys) {
+			if(key < min)
+				min = key;
+		}
+		_index = min;
+	}
+	
+	public void writeAll(String str){
+		for(int i = 0; i < str.length(); i++){
+			write(str.charAt(i));
+			move(Direction.RIGHT);
+		}
+	}
+	
 }

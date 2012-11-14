@@ -6,31 +6,40 @@ public class TuringMachine {
 	
 	public static void main(String[] args) {
 		TuringMachine tm = TuringMachineUtils.buildTuringMachine();
-		System.out.println(tm);
+		System.out.println("States: "+tm.states);
 		tm.run();
 	}
 
 	private Tape tape;
 	private Set<State> states;
+	private State begin;
 	
-	public TuringMachine(String string, Set<State> states){
+	public TuringMachine(String string, Set<State> states, State begin){
 		tape = new Tape();
-		TuringMachineUtils.writeOnTape(string, tape);
+		tape.writeAll(string);
+		tape.goToFirst();
 		this.states = states;
+		this.begin = begin;
 	}
 	
 	public void run() {
-		State current;
-		// find initial state
-		for (State s : states) {
-			if(s.getName().equals("s0")){
-				current = s;
-				break;
+		State current = begin;
+		while(true){
+			System.out.println("Tape: " + this.tape);
+			// for each transaction
+			for (Transaction t : current) {
+				// check transaction condition
+				if(t.readSymbol == null || t.readSymbol.equals(tape.read())){
+					// execute transaction
+					if(t.writeSymbol != null) tape.write(t.writeSymbol);
+					tape.move(t.direction);
+					current = t.toState;
+					break;
+				}
 			}
+			// if the final state has been reached then terminate
+			if(current.getName().equals("terminate")) break;
 		}
-		
-		// TODO
-		
 	}
 
 	public Set<State> getStates() {
