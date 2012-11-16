@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/it.marcotinacci.xturing/src-gen" editDirectory="/it.marcotinacci.xturing.edit/src"
+    editorDirectory="/it.marcotinacci.xturing.editor/src" modelPluginID="it.marcotinacci.xturing"
+    forceOverwrite="true" modelName="XTuring" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="it.marcotinacci.xturing.edit"
+    editorPluginID="it.marcotinacci.xturing.editor" runtimeVersion="2.8">
+  <genPackages prefix="XTuring" basePackage="it.marcotinacci.xturing" disposableProviderFactory="true"
+      ecorePackage="XTuring.ecore#/">
+    <genClasses ecoreClass="XTuring.ecore#//Machine">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XTuring.ecore#//Machine/symbols"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XTuring.ecore#//Machine/states"/>
+    </genClasses>
+    <genClasses ecoreClass="XTuring.ecore#//Symbol">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XTuring.ecore#//Symbol/name"/>
+    </genClasses>
+    <genClasses ecoreClass="XTuring.ecore#//State">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XTuring.ecore#//State/beginState"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XTuring.ecore#//State/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XTuring.ecore#//State/transactions"/>
+    </genClasses>
+    <genClasses ecoreClass="XTuring.ecore#//Transaction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XTuring.ecore#//Transaction/reading"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XTuring.ecore#//Transaction/read"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XTuring.ecore#//Transaction/writing"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XTuring.ecore#//Transaction/write"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XTuring.ecore#//Transaction/moving"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XTuring.ecore#//Transaction/move"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XTuring.ecore#//Transaction/next"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XTuring.ecore#//Transaction/toState"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XTuring.ecore#//Transaction/final"/>
+    </genClasses>
+    <genClasses ecoreClass="XTuring.ecore#//ReadWriteSymbol">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XTuring.ecore#//ReadWriteSymbol/symbol"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XTuring.ecore#//ReadWriteSymbol/empty"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
