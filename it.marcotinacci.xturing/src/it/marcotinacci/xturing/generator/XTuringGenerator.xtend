@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 
-class XTuringGenerator implements IGenerator {
+public class XTuringGenerator implements IGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		var Machine m = resource.contents.get(0) as Machine
@@ -32,11 +32,11 @@ class XTuringGenerator implements IGenerator {
 		public class TuringMachineBuilder {
 
 			public static void main(String[] args) {
-				TuringMachine tm = TuringMachineBuilder.build();
+				TuringMachine tm = TuringMachineBuilder.build("11+1");
 				tm.run();
 			}
 
-			public static TuringMachine build(){
+			public static TuringMachine build(String inputTape){
 				HashSet<State> states = new HashSet<State>();
 				State terminate = new State("terminate");
 				states.add(terminate);
@@ -49,7 +49,7 @@ class XTuringGenerator implements IGenerator {
 				«FOR state:machine.states»
 					«addTransactions(state.name, state.transactions)»
 				«ENDFOR»
-				return new TuringMachine("111+11", states, begin);
+				return new TuringMachine(inputTape, states, begin);
 			}
 		}
 		'''

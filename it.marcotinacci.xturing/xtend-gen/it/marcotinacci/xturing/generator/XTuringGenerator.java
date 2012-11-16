@@ -53,7 +53,7 @@ public class XTuringGenerator implements IGenerator {
     _builder.append("public static void main(String[] args) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("TuringMachine tm = TuringMachineBuilder.build();");
+    _builder.append("TuringMachine tm = TuringMachineBuilder.build(\"11+1\");");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("tm.run();");
@@ -63,7 +63,7 @@ public class XTuringGenerator implements IGenerator {
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public static TuringMachine build(){");
+    _builder.append("public static TuringMachine build(String inputTape){");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("HashSet<State> states = new HashSet<State>();");
@@ -122,7 +122,7 @@ public class XTuringGenerator implements IGenerator {
       }
     }
     _builder.append("\t\t");
-    _builder.append("return new TuringMachine(\"111+11\", states, begin);");
+    _builder.append("return new TuringMachine(inputTape, states, begin);");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");

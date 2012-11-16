@@ -5,7 +5,7 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 
 public class XTuringQuickfixProvider extends DefaultQuickfixProvider {
 
-//	@Fix(MyJavaValidator.INVALID_NAME)
+//	@Fix(XTuringJavaValidator.INVALID_NAME)
 //	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {
 //		acceptor.accept(issue, "Capitalize name", "Capitalize the name.", "upcase.png", new IModification() {
 //			public void apply(IModificationContext context) throws BadLocationException {
