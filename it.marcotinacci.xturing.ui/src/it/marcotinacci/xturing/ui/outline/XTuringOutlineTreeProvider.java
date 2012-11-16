@@ -93,7 +93,7 @@ public class XTuringOutlineTreeProvider extends DefaultOutlineTreeProvider {
 				createEObjectNode(node2, transaction.getToState(), null, "next state: "+transaction.getToState().getName(), true);
 				
 			}else if(transaction.isFinal()){
-				createEObjectNode(node2, transaction.getToState(), null, "terminate", true);
+				createEObjectNode(node2, state, null, "terminate", true);
 			}else{
 				createEObjectNode(node2, state, null, "next state: "+state.getName(), true);
 			}
